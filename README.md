@@ -33,7 +33,7 @@ Actualmente, la aplicación permite:
 3.  **Crear y Editar:** Formularios para agregar nuevos Pokémon (subiendo su foto) o corregir sus datos.
 4.  **Eliminar:** Borrado de registros con confirmación de seguridad.
 
-## 📦 ¿Cómo probarlo en tu PC?
+## ¿Cómo probarlo en tu PC?:
 
 Si quieres correr este proyecto localmente:
 

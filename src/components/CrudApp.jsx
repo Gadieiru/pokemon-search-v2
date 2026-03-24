@@ -7,11 +7,11 @@ import { sounds } from "../helpers/soundHelper.js";
 import "../styles/layout.css";
 
 export const CrudApp = () => {
-  const [db, setDb] = useState([]);
   const [dataToEdit, setDataToEdit] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
+  const [db, setDb] = useState([]);
   const [rarityData, setRarityData] = useState([]);
   const [typeData, setTypeData] = useState([]);
   const [locationData, setLocationData] = useState([]);
@@ -20,6 +20,28 @@ export const CrudApp = () => {
   const APIBaseUrl = "http://localhost:3000";
   const APICRUDUrl = `${APIBaseUrl}/crud`;
 
+  const createData = async (formData) => {
+    const token = localStorage.getItem("token");
+
+    let options = {
+      body: formData,
+      headers: {
+        Authorization: `Bearer ${token}`,
+        Accept: "application/json",
+      },
+    };
+
+    const res = await api.post(APICRUDUrl, options);
+    if (!res.err) {
+      sounds.playSuccess();
+      alert("Pokémon creado con éxito");
+      getPokemons();
+    } else {
+      sounds.playError();
+      alert(`Error al crear: ${res.statusText || "Verifica los datos"}`);
+    }
+  };
+  
   const getPokemons = async () => {
     const res = await api.get(APICRUDUrl);
     if (!res.err) {
@@ -29,7 +51,7 @@ export const CrudApp = () => {
       setError(res);
     }
   };
-
+  
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
@@ -55,28 +77,6 @@ export const CrudApp = () => {
     };
     fetchData();
   }, []);
-
-  const createData = async (formData) => {
-    const token = localStorage.getItem("token");
-
-    let options = {
-      body: formData,
-      headers: {
-        Authorization: `Bearer ${token}`,
-        Accept: "application/json",
-      },
-    };
-
-    const res = await api.post(APICRUDUrl, options);
-    if (!res.err) {
-      sounds.playSuccess();
-      alert("Pokémon creado con éxito");
-      getPokemons();
-    } else {
-      sounds.playError();
-      alert(`Error al crear: ${res.statusText || "Verifica los datos"}`);
-    }
-  };
 
   const updateData = async (formData) => {
     const id = formData.get("pokemon_id");
@@ -112,7 +112,7 @@ export const CrudApp = () => {
         headers: { Authorization: `Bearer ${token}` },
       };
 
-      const res = await api.del( endpoint, options);
+      const res = await api.del(endpoint, options);
 
       if (!res.err) {
         sounds.playDelete();

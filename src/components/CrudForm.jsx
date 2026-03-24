@@ -26,31 +26,33 @@ export const CrudForm = ({
   useEffect(() => {
     if (dataToEdit) {
       const typeNames = dataToEdit.types
-        ? dataToEdit.types.split(",").map((s) => s.trim())
+        ? dataToEdit?.types?.split("/").map((s) => s?.trim())
         : [];
       const locationNames = dataToEdit.location
-        ? dataToEdit.location.split(",").map((s) => s.trim())
+        ? dataToEdit.location.split(",").map((s) => s?.trim())
         : [];
 
       const typeIds = typeOptions
-        .filter((t) => typeNames.includes(t.name))
+        .filter((t) => typeNames.includes(t?.name))
         .map((t) => t.id);
 
       const locationIds = locationOptions
-        .filter((l) => locationNames.includes(l.name))
+        .filter((l) => locationNames.includes(l?.name))
         .map((l) => l.id);
 
       let previewUrl = null;
-      if (dataToEdit.pokemon_id) {
+      if (dataToEdit?.pokemon_id) {
         previewUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${dataToEdit.pokemon_id}.png`;
       }
 
       setForm({
         ...dataToEdit,
         pokemon_name: dataToEdit.pokemon_name,
+
         rarity_id:
-          rarityOptions.find((r) => r.name === dataToEdit.rarity_name)?.id ||
+          rarityOptions.find((r) => r?.name === dataToEdit?.rarity_name)?.id ||
           "",
+
         type_id: typeIds,
         location_id: locationIds,
         imageFile: null,
@@ -64,15 +66,15 @@ export const CrudForm = ({
 
   useEffect(() => {
     return () => {
-      if (form.imagePreview && form.imagePreview.startsWith("blob:")) {
-        URL.revokeObjectURL(form.imagePreview);
+      if (form?.imagePreview && form?.imagePreview?.startsWith("blob:")) {
+        URL.revokeObjectURL(form?.imagePreview);
       }
     };
-  }, [form.imagePreview]);
+  }, [form?.imagePreview]);
 
   const handleChange = (e) => {
-    let value = e.target.value;
-    const name = e.target.name;
+    let value = e.target?.value;
+    const name = e.target?.name;
 
     if (name.endsWith("_id")) {
       value = value === "" ? "" : parseInt(value, 10);
@@ -88,10 +90,10 @@ export const CrudForm = ({
     e.preventDefault();
 
     if (
-      !form.pokemon_name ||
-      form.type_id.length === 0 ||
-      form.location_id.length === 0 ||
-      !form.rarity_id
+      !form?.pokemon_name ||
+      form?.type_id.length === 0 ||
+      form?.location_id.length === 0 ||
+      !form?.rarity_id
     ) {
       return alert("Por favor, completa todos los campos obligatorios.");
     }
@@ -100,7 +102,7 @@ export const CrudForm = ({
     fd.append("pokemon_name", form.pokemon_name);
     fd.append("rarity_id", form.rarity_id);
 
-    // Convertimos arrays a string JSON para que el backend los procese
+    // Convertimos arrays a string JSON para que el backend los procese.
     fd.append("type_id", JSON.stringify(form.type_id));
     fd.append("location_id", JSON.stringify(form.location_id));
 

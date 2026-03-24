@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { PokemonForm } from "./PokemonForm.jsx";
-import { PokemonDetails } from "./PokemonDetails.jsx";
 import { HelpHttp } from "../helpers/HelpHttp.jsx";
-import { Loader } from "./Loader.jsx";
 import { PokemonLayout } from "./PokemonLayout.jsx";
 import "../styles/App.css";
 import "../styles/components.css";
@@ -25,7 +23,7 @@ export const PokemonSearch = () => {
   useEffect(() => {
     if (!search) return;
 
-    const fetchData = async () => {
+    const axiosData = async () => {
       const { Pokemon } = search;
       setLoading(true);
       setError(null);
@@ -33,15 +31,17 @@ export const PokemonSearch = () => {
       // Se activa el loading
 
       try {
-        const res = await api.get(`${urlBase}?name=${Pokemon}`);
+        const res = await api.get(urlBase, {
+          params: {search: Pokemon}
+        })
 
         if (!res.err && res.length > 0) {
           const newPokemon = res[0];
           setPokemon(newPokemon);
+
           // res[0] porque el backend devuelve un array con el mejor resultado.
           setHistory((prev) => {
             const name = newPokemon.pokemon_name.toUpperCase();
-
             if (prev.includes(name)) return prev;
             return [name, ...prev].slice(0, 6);
           });
@@ -50,14 +50,14 @@ export const PokemonSearch = () => {
         }
       } catch (error) {
         console.error("Error al obtener datos", error);
-        setError("Hibo un error al conectar con el servidor.");
+        setError("Hubo un error al conectar con el servidor.");
       } finally {
         setLoading(false);
         // Fin de la peticion del useEffect
       }
     };
     // se llama al fetch Data de nuevo y este se volvera a ejecutar en el momento en que el :search: cambie.
-    fetchData();
+    axiosData();
   }, [search]);
 
   useEffect(() => {
