@@ -1,12 +1,12 @@
-import { PokemonSearch } from "./components/PokemonSearch.jsx";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
-import { CrudApp } from "./components/CrudApp.jsx";
-import { LoginUser } from "./components/LoginUser.jsx";
-import { PrivateRoute } from "./components/PrivateRoute.jsx";
-import { RegisterUser } from "./components/RegisterUser.jsx";
-import { AuthProvider } from "./context/auth/AuthProvider.jsx";
-import { MainLayout } from "./components/MainLayout.jsx";
-import { Home } from "./pages/Home.jsx";
+import { PokemonSearch } from "./components/PokemonSearch";
+import { CrudApp } from "./components/CrudApp";
+import { LoginUser } from "./components/LoginUser";
+import { PrivateRoute } from "./components/PrivateRoute";
+import { RegisterUser } from "./components/RegisterUser";
+import { AuthProvider } from "./context/auth/AuthProvider";
+import { MainLayout } from "./components/MainLayout";
+import { Home } from "./pages/Home";
 
 function App() {
   return (
