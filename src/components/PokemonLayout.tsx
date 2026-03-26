@@ -61,10 +61,11 @@ export const PokemonLayout = ({
           </ul>
 
           {history.length > 0 && (
-            <button 
-            className="btn-clear" 
-            onClick={onClearHistory}
-            type="button">
+            <button
+              className="btn-clear"
+              onClick={onClearHistory}
+              type="button"
+            >
               Eliminar historial
             </button>
           )}
@@ -90,11 +91,14 @@ export const PokemonLayout = ({
         <aside className="panel sidebar-right">
           <div className="panel-header">AYUDA</div>
           <p className="tip-text">
-            <strong>TIP:</strong>Usa nombres exactos para sincronizar con la base de datos regional.
+            <strong>TIP:</strong>Usa nombres exactos para sincronizar con la
+            base de datos regional.
           </p>
           <div className="led-indicators">
-            <div className={`led ${loading ? 'blue-blink' : pokemonData ? 'green' : 'red'}`}></div>
-            <div className={`led ${error ? 'yellow-blink' : 'yellow'}`}></div>
+            <div
+              className={`led ${loading ? "blue-blink" : pokemonData ? "green" : "red"}`}
+            ></div>
+            <div className={`led ${error ? "yellow-blink" : "yellow"}`}></div>
           </div>
         </aside>
       </div>

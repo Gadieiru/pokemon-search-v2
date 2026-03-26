@@ -1,4 +1,4 @@
-import { Message } from "./Message.jsx";
+import { Message } from "./Message.js";
 import { PokemonName } from "./PokemonDataSheet.js";
 
 export const PokemonDetails = ({ search, pokemon }) => {

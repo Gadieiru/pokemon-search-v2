@@ -110,7 +110,3 @@ export const PokemonSearch = () => {
     </div>
   );
 };
-
-/*      {pokemon && !loading && (
-              <PokemonDetails search={search} pokemon={pokemon} />
-        )} */
