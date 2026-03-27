@@ -1,19 +1,21 @@
-const playAudio = (fileName) => {
+type soundEffect = 'select' | 'success' | 'error' | 'delete';
+
+const playAudio = (fileName: soundEffect) => {
   const audio = new Audio(`/sounds/${fileName}.mp3`);
   
   audio.volume = 0.3;
-  audio.play().catch(error => {
+  audio.play().catch((error: Error) => {
     if (error.name === 'NotAllowedError') {
-       console.warn("Haz clic en la pantalla primero para activar el sonido.");
+       console.warn("Autoplay bloqueado: Haz clic en la pantalla primero para activar el sonido.");
     } else {
-       console.error("Error al cargar el audio:", fileName, error);
+       console.error(`Error al cargar el audio: ${fileName}`, error);
     }
   });
 };
 
 export const sounds = {
-  playSelect: () => playAudio('select'),
-  playSuccess: () => playAudio('success'),
-  playError: () => playAudio('error'),
-  playDelete: () => playAudio('delete'),
+  playSelect: (): void => playAudio('select'),
+  playSuccess: (): void => playAudio('success'),
+  playError: (): void => playAudio('error'),
+  playDelete: (): void => playAudio('delete'),
 }
