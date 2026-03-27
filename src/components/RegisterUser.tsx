@@ -1,24 +1,26 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
+import React, { useState, useActionState } from "react";
+import { useNavigate, Link } from "react-router-dom";
+import axios, {AxiosError} from "axios";
 import OpenEye from "../icons/ojo-abierto.png";
 import CloseEye from "../icons/ojo-cerrado.png";
 import Return from "../icons/return.png";
 import "../styles/password_style.css";
 
+interface ActionState {
+  success?: boolean;
+  error?: string | null;
+}
 
-export const RegisterUser = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [userFirstname, setUserFirstname] = useState("");
-  const [userLastname, setUserLastname] = useState("");
-
-  const [showPassword, setShowPassword] = useState(false);
+export const RegisterUser: React.FC = () => {
   const navigate = useNavigate();
 
-  const handleRegister = async (e) => {
-    e.preventDefault();
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [userFirstname, setUserFirstname] = useState<string>("");
+  const [userLastname, setUserLastname] = useState<string>("");
+  const [showPassword, setShowPassword] = useState<boolean>(false);
 
+  const handleRegisterAction = async (_prevState: ActionState | null): Promise<ActionState> => {
     const newUser = {
       firstname: userFirstname,
       lastname: userLastname,
@@ -27,25 +29,21 @@ export const RegisterUser = () => {
     };
 
     try {
-      const response = await fetch("http://localhost:3000/users/register", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(newUser),
-      });
+      await axios.post("http://localhost:3000/users/register", newUser);
 
-      const data = await response.json();
+      alert("¡Usuario registrado con éxito! Ahora inicia sesión.")
+      navigate("/login")
+      return { success: true, error: null}
 
-      if (response.ok) {
-        alert("¡Usuario registrado con éxito! Ahora inicia sesión.");
-        navigate("/login");
-      } else {
-        alert(data.message || "Error al registrar el usuario");
-      }
     } catch (err) {
-      console.error("Error en el registro:", err);
-      alert("No se pudo conectar con el servidor");
+      const error = err as AxiosError<{ message: string }>;
+      const errorMessage = error.response?.data?.message || "Error al conectar con el servidor";
+
+      return { success: false, error: errorMessage};
     }
   };
+
+  const [state, formAction, isPending] = useActionState(handleRegisterAction, null);
 
   return (
     <div className="form_content">
@@ -54,7 +52,7 @@ export const RegisterUser = () => {
       </Link>
 
       <div className="form_user">
-        <form onSubmit={handleRegister}>
+        <form onSubmit={(e) => { e.preventDefault(); formAction() }}>
           <h2 className="press-start-2p-regular page--title">Regístrate</h2>
 
           <input
@@ -91,6 +89,7 @@ export const RegisterUser = () => {
               className="heroui-style-input"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              disabled={isPending}
               required
             />
 
@@ -99,6 +98,7 @@ export const RegisterUser = () => {
               className="toggle-password"
               onClick={() => setShowPassword(!showPassword)}
             >
+
               <img
                 src={showPassword ? CloseEye : OpenEye}
                 alt="Toggle Password"
@@ -107,8 +107,14 @@ export const RegisterUser = () => {
             </button>
           </div>
 
-          <button type="submit" className="btn">
-            Registrarse
+          {state?.error && (
+            <p className="error-message" style={{ color: '#ff4b4b', textAlign: 'center' }}>
+              {state.error}
+            </p>
+          )}
+
+          <button type="submit" className="btn" disabled={isPending}>
+            {isPending ? "Registrando" : "Registrarse"}
           </button>
 
           <div>

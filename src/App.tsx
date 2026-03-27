@@ -4,7 +4,7 @@ import { CrudApp } from "./components/CrudApp";
 import { LoginUser } from "./components/LoginUser";
 import { PrivateRoute } from "./components/PrivateRoute";
 import { RegisterUser } from "./components/RegisterUser";
-import { AuthProvider } from "./context/auth/AuthProvider";
+import { AuthProvider } from "./context/Auth/AuthProvider";
 import { MainLayout } from "./components/MainLayout";
 import { Home } from "./pages/Home";
 
