@@ -1,6 +1,8 @@
+import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { useAuth } from "../hooks/useAuth.jsx";
-import { useState } from "react";
+import { confirmDelete } from "../helpers/alert";
+import { useAuth } from "../hooks/useAuth.js";
+import { sounds } from "../helpers/soundHelper.js";
 import HomeIcon from "../icons/home.png";
 import AddIcon from "../icons/plus.png";
 import Pokeball from "../icons/pokeball.png";
@@ -9,21 +11,25 @@ import LogOut from "../icons/logout.png";
 import Pokedex from "../icons/pokedex.png";
 import "../styles/App.css";
 import "../styles/navbar_menu.css";
-export const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
 
-  const toggleMenu = () => setIsOpen(!isOpen);
-
+export const Navbar: React.FC = () => {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const { auth, logout } = useAuth();
   const navigate = useNavigate();
 
-  const handleLogoutClick = (e) => {
-    e.preventDefault();
+  const toggleMenu = (): void => {
+    sounds.playSelect();
+    setIsOpen(!isOpen);
+  };
 
-    const confirmLogout = window.confirm(
-      "¿Estás seguro de que deseas cerrar sesión?"
-    );
-    if (confirmLogout) {
+  const handleLogoutClick = async (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    setIsOpen(false);
+
+    const confirmed = await confirmDelete("SESION");
+
+    if (confirmed) {
+      sounds.playDelete();
       logout();
       navigate("/Login");
     }
@@ -34,8 +40,16 @@ export const Navbar = () => {
       <aside className={`navbar ${isOpen ? "open" : ""}`}>
         <nav className="navbar_nav">
           <div className="burger-container">
-            <button className="burger-btn" onClick={toggleMenu}>
-              <img className="img_pokeball" src={Pokeball} alt="boton" />
+            <button
+              className="burger-btn"
+              onClick={toggleMenu}
+              aria-label="Menu"
+            >
+              <img
+                className="img_pokeball"
+                src={Pokeball}
+                alt="pokeball toggle"
+              />
             </button>
           </div>
 
@@ -43,7 +57,7 @@ export const Navbar = () => {
             <li className="navbar_nav-list">
               <NavLink
                 onClick={() => setIsOpen(false)}
-                className={({ isActive }) => (isActive ? "active-link" : null)}
+                className={({ isActive }) => (isActive ? "active-link" : "")}
                 to="/"
               >
                 <img className="icon" src={HomeIcon} alt="Inicio" />
@@ -54,10 +68,10 @@ export const Navbar = () => {
             <li className="navbar_nav-list">
               <NavLink
                 onClick={() => setIsOpen(false)}
-                className={({ isActive }) => (isActive ? "active-link" : null)}
+                className={({ isActive }) => (isActive ? "active-link" : "")}
                 to="/Pokedex"
               >
-                <img className="icon" src={Pokedex} alt="Inicio" />
+                <img className="icon" src={Pokedex} alt="Pokedex" />
                 <span className="press-start-2p-regular">Pokedex</span>
               </NavLink>
             </li>
@@ -65,10 +79,10 @@ export const Navbar = () => {
             <li className="navbar_nav-list">
               <NavLink
                 onClick={() => setIsOpen(false)}
-                className={({ isActive }) => (isActive ? "active-link" : null)}
+                className={({ isActive }) => (isActive ? "active-link" : "")}
                 to="/Add"
               >
-                <img className="icon" src={AddIcon} alt="Insertar" />
+                <img className="icon" src={AddIcon} alt="Agregar" />
                 <span className="press-start-2p-regular">Agregar</span>
               </NavLink>
             </li>
@@ -77,7 +91,7 @@ export const Navbar = () => {
               {auth ? (
                 <NavLink
                   className="navbar_nav-link"
-                  to="/Logout"
+                  to="#"
                   onClick={handleLogoutClick}
                 >
                   <img className="icon" src={LogOut} alt="Cerrar Sesión" />
@@ -86,9 +100,7 @@ export const Navbar = () => {
               ) : (
                 <NavLink
                   onClick={() => setIsOpen(false)}
-                  className={({ isActive }) =>
-                    isActive ? "active-link" : null
-                  }
+                  className={({ isActive }) => (isActive ? "active-link" : "")}
                   to="/Login"
                 >
                   <img className="icon" src={LogIn} alt="Iniciar Sesión" />
