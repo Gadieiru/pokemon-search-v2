@@ -1,9 +1,10 @@
+import React from 'react';
 import { Link } from 'react-router-dom';
 import "../styles/navbar_menu.css"
 import '../styles/Home.css'; 
 import pokeballIcon from '../icons/pokeball.png';
 
-export const Home = () => {
+export const Home: React.FC = () => {
     return (
         <div className="home-container">
       <div className="home-content">
@@ -20,7 +21,8 @@ export const Home = () => {
         </p>
 
         <div className="tech-stack">
-          <span className="tech-pill">⚛️ React JS</span>
+          <span className="tech-pill">⚛️ React 19</span>
+          <span className="tech-pill">🟦 TypeScript</span>
           <span className="tech-pill">🎨 CSS3 Retro</span>
           <span className="tech-pill">🔌 REST API</span>
           <span className="tech-pill">📱 Responsive</span>
@@ -30,7 +32,7 @@ export const Home = () => {
           <Link to="/login" className="btn-start">
             PRESS START
           </Link>
-          <a href="https://github.com/Gadieiru" target="_blank" rel="noreferrer" className="btn-github">
+          <a href="https://github.com/Gadieiru" target="_blank" rel="noopener noreferrer" className="btn-github">
             VER CÓDIGO GITHUB
           </a>
         </div>
