@@ -1,37 +1,53 @@
+import { useState, useMemo } from "react";
 import { CrudTableRow } from "./CrudTableRow";
-import { useState } from "react";
+import { Pokemon } from "../types/pokemon";
 import "../styles/Components.css";
 import "../styles/App.css";
 
-export const CrudTable = ({ data, setDataToEdit, deleteData, dataToEdit }) => {
+interface CrudTableProps {
+  data: Pokemon[];
+  setDataToEdit: (data: Pokemon | null) => void;
+  deleteData: (id: number) => void;
+  dataToEdit: Pokemon | null;
+}
+
+export const CrudTable: React.FC<CrudTableProps> = ({
+  data,
+  setDataToEdit,
+  deleteData,
+  dataToEdit,
+}) => {
   const [filter, setFilter] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 15;
 
-  const safeData = Array.isArray(data) ? data : [];
+  const filteredData = useMemo(() => {
+    const safeData = Array.isArray(data) ? data : [];
+    return safeData.filter((el) =>
+      el.pokemon_name.toLocaleLowerCase().includes(filter.toLocaleLowerCase()),
+    );
+  }, [data, filter]);
 
-  const filteredData = safeData.filter((el) =>
-    el.pokemon_name.toLowerCase().includes(filter.toLowerCase())
-  );
-
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentData = filteredData.slice(indexOfFirstItem, indexOfLastItem);
+  const currentData = useMemo(() => {
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    return filteredData.slice(indexOfFirstItem, indexOfLastItem);
+  }, [filteredData, currentPage, itemsPerPage]);
 
   const totalPages = Math.ceil(filteredData.length / itemsPerPage);
 
   return (
     <div className="crud-table-container">
-        <h2 className="panel-header">BASE DE DATOS</h2>
-      <div className="table-header-tools">
+      <h2 className="panel-header press-start-2p-regular">Tabla de Pokemons</h2>
 
+      <div className="table-header-tools">
         <div className="search-container">
           <input
             type="text"
             className="table-search-input"
             placeholder="FILTRAR POR NOMBRE..."
             value={filter}
-            onChange={(e) => {
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
               setFilter(e.target.value);
               setCurrentPage(1);
             }}
@@ -59,13 +75,13 @@ export const CrudTable = ({ data, setDataToEdit, deleteData, dataToEdit }) => {
                   el={el}
                   setDataToEdit={setDataToEdit}
                   deleteData={deleteData}
-                  isEditing={dataToEdit && dataToEdit.pokemon_id === el.pokemon_id}
+                  idEditing={dataToEdit?.pokemon_id === el.pokemon_id}
                 />
               ))
             ) : (
               <tr>
-                <td colSpan="6" className="no-data">
-                  <span className="blink-text">▶</span> NO SE DETECTAN REGISTROS
+                <td colSpan={6} className="no-data">
+                  <span className="blink-text">▶</span> No se detectan registros
                 </td>
               </tr>
             )}

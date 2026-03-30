@@ -154,6 +154,7 @@ export const CrudApp: React.FC = () => {
             data={db}
             setDataToEdit={setDataToEdit}
             deleteData={deleteData}
+            dataToEdit={dataToEdit}
           />
         </article>
       )}
