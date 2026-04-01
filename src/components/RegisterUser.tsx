@@ -1,6 +1,8 @@
 import React, { useState, useActionState } from "react";
-import { useNavigate, Link } from "react-router-dom";
 import axios, {AxiosError} from "axios";
+import { useNavigate, Link } from "react-router-dom";
+import { sounds } from "../helpers/soundHelper";
+import { notifySuccess } from "../helpers/alert";
 import OpenEye from "../icons/ojo-abierto.png";
 import CloseEye from "../icons/ojo-cerrado.png";
 import Return from "../icons/return.png";
@@ -29,9 +31,10 @@ export const RegisterUser: React.FC = () => {
     };
 
     try {
-      await axios.post("http://localhost:3000/users/register", newUser);
+      await axios.post("http://localhost:3000/auth/register", newUser);
 
-      alert("¡Usuario registrado con éxito! Ahora inicia sesión.")
+      sounds.playSuccess();
+      notifySuccess("¡ÉXITO!", "Sesion iniciada con exito");
       navigate("/login")
       return { success: true, error: null}
 

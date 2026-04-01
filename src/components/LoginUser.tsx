@@ -33,7 +33,7 @@ export const LoginUser = () => {
   ): Promise<ActionState> => {
     try {
       const response = await axios.post<LoginResponse>(
-        "http://localhost:3000/users/login",
+        "http://localhost:3000/auth/login",
         { email, password },
       );
 

@@ -75,7 +75,7 @@ export const CrudTable: React.FC<CrudTableProps> = ({
                   el={el}
                   setDataToEdit={setDataToEdit}
                   deleteData={deleteData}
-                  idEditing={dataToEdit?.pokemon_id === el.pokemon_id}
+                  isEditing={dataToEdit?.pokemon_id === el.pokemon_id}
                 />
               ))
             ) : (
