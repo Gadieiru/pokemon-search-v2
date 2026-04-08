@@ -17,6 +17,7 @@ export const CrudTable: React.FC<CrudTableProps> = ({
   deleteData,
   dataToEdit,
 }) => {
+  console.log("Datos recibidos en CrudTable:", data);
   const [filter, setFilter] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 15;

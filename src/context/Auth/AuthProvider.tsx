@@ -1,12 +1,16 @@
 import { useState, ReactNode, useMemo } from "react";
-import AuthContext, { AuthContextType, UserData } from "./AuthContext.js";
+import AuthContext, { AuthContextType, UserData } from "./AuthContext";
+import { HelpHttp } from "../../helpers/HelpHttp";
 
 interface AuthProviderProps {
   children: ReactNode;
 }
 
+const baseUrl = "http://localhost:3000";
+const api = HelpHttp();
+
 export const AuthProvider = ({ children }: AuthProviderProps) => {
-  const [auth, setAuth] = useState<boolean>(!!localStorage.getItem("token"));
+  const [auth, setAuth] = useState<boolean>(!!localStorage.getItem("access_token"));
   const [user, setUser] = useState<UserData | null>(() => {
     const savedUser = localStorage.getItem("user");
     try {
@@ -15,21 +19,23 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       return null;
     }
   });
-
+  
   const [loading] = useState<boolean>(false);
 
   const login = (token: string, userData: UserData): void => {
-    localStorage.setItem("token", token);
+    localStorage.setItem("access_token", token || "session_active");
     localStorage.setItem("user", JSON.stringify(userData));
     setAuth(true);
     setUser(userData);
   };
 
   const logout = (): void => {
-    localStorage.removeItem("token");
+    localStorage.removeItem("access_token");
     localStorage.removeItem("user");
     setAuth(false);
     setUser(null);
+
+    api.post(`${baseUrl}/auth/logout`, {}, { withCredentials: true });
   };
 
   const value = useMemo<AuthContextType>(() => ({

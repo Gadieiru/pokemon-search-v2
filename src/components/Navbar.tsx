@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { confirmDelete } from "../helpers/alert";
-import { useAuth } from "../hooks/useAuth.js";
-import { sounds } from "../helpers/soundHelper.js";
+import { useAuth } from "../hooks/useAuth";
+import { sounds } from "../helpers/soundHelper";
 import HomeIcon from "../icons/home.png";
 import AddIcon from "../icons/plus.png";
 import Pokeball from "../icons/pokeball.png";

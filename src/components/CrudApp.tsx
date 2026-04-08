@@ -29,15 +29,25 @@ export const CrudApp: React.FC = () => {
   const isError = (res: any): res is HttpError => res.err === true;
 
   const fetchData = React.useCallback(async () => {
+    const token = localStorage.getItem("access_token");
     setLoading(true);
     setError(null);
 
+    const options = {
+      headers: {
+        Authorization: `Bearer ${token}`
+      },
+      withCredentials: true, 
+    };
+
+    console.log("TOKEN ENVIADO AL CRUD:", token);
+
     try {
       const [resPk, resRa, resTy, resLo] = await Promise.all([
-        api.get<Pokemon[]>(`${baseUrl}/crud`),
-        api.get<CatalogOption[]>(`${baseUrl}/rarity`),
-        api.get<CatalogOption[]>(`${baseUrl}/type`),
-        api.get<CatalogOption[]>(`${baseUrl}/location`),
+        api.get<Pokemon[]>(`${baseUrl}/api/crud`, options),
+        api.get<CatalogOption[]>(`${baseUrl}/list/rarity`, options),
+        api.get<CatalogOption[]>(`${baseUrl}/list/type`, options),
+        api.get<CatalogOption[]>(`${baseUrl}/list/location`, options),
       ]);
 
       if (!isError(resPk)) setDb(resPk);
@@ -57,15 +67,14 @@ export const CrudApp: React.FC = () => {
   }, [fetchData]);
 
   const createData = async (formData: FormData) => {
-    const token = localStorage.getItem("token");
-    const res = await api.post<Pokemon>(`${baseUrl}/crud`, formData, {
-      headers: { Authorization: `Bearer ${token}` },
+    const res = await api.post<Pokemon>(`${baseUrl}/api/crud`, formData, {
+      withCredentials: true,
     });
 
     if (!isError(res)) {
       sounds.playSuccess();
       notifySuccess("CAPTURADO", "REGISTRO EXITOSO");
-      fetchData(); // Recargamos para ver los cambios
+      fetchData();
     } else {
       sounds.playError();
       notifyError("ERROR", res.statusText);
@@ -74,17 +83,14 @@ export const CrudApp: React.FC = () => {
 
   const updateData = async (formData: FormData) => {
     const id = formData.get("pokemon_id");
-    const token = localStorage.getItem("token");
 
-    const res = await api.put<Pokemon>(`${baseUrl}/crud/${id}`, formData, {
-      headers: { Authorization: `Bearer ${token}` },
+    const res = await api.put<Pokemon>(`${baseUrl}/api/crud/${id}`, formData, {
+      withCredentials: true,
     });
 
     if (!isError(res)) {
       notifySuccess("ACTUALIZADO", "Datos guardados en la pokedex");
 
-      // 3. Reutilizamos fetchData() para que la tabla se actualice
-      // con la info real de la DB, incluyendo cambios de nombres de tipos/rarezas.
       fetchData();
       setDataToEdit(null);
     } else {
@@ -99,9 +105,8 @@ export const CrudApp: React.FC = () => {
     const isConfirmed = await confirmDelete(id.toString());
     if (!isConfirmed) return;
 
-    const token = localStorage.getItem("token");
-    const res = await api.del(`${baseUrl}/crud/${id}`, {
-      headers: { Authorization: `Bearer ${token}` },
+    const res = await api.del(`${baseUrl}/api/crud/${id}`, {
+      withCredentials: true,
     });
 
     if (!isError(res)) {

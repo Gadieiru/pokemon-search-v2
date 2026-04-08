@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-import { PokemonForm } from "./PokemonForm.js";
+import { PokemonForm } from "./PokemonForm";
 import { HelpHttp } from "../helpers/HelpHttp";
-import { PokemonLayout } from "./PokemonLayout.js";
-import { sounds } from "../helpers/soundHelper.js";
+import { PokemonLayout } from "./PokemonLayout";
+import { sounds } from "../helpers/soundHelper";
 import { Pokemon, SearchData } from "../types/pokemon";
 import "../styles/App.css";
 import "../styles/components.css";
