@@ -13,25 +13,9 @@
   justify-content: space-between;
   z-index: 100;
   background-color: var(--pokedex-red);
-  border-bottom: 1.5px solid var(--deep-brown);
+  border-bottom: 4px solid var(--deep-brown);
   padding: 0 1rem;
-}
-
-.navbar_nav-list a {
-  display: flex;
-  gap: 0.5rem;
-  align-items: center;
-  justify-content: start;
-  text-decoration: none;
-  color: var(--vintage-cream);
-  font-family: "Montserrat", sans-serif;
-  transition: all 0.2s ease;
-}
-
-.navbar_nav-list a:hover {
-  text-decoration: none;
-  color: #fff;
-  transform: translateY(-2px);
+  box-shadow: 0 4px 0px rgba(0, 0, 0, 0.15);
 }
 
 .navbar_nav {
@@ -54,13 +38,27 @@
   width: auto;
 }
 
+.navbar_nav-list a {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: start;
+  text-decoration: none;
+  color: var(--vintage-cream);
+  font-family: "Montserrat", sans-serif;
+  transition: all 0.2s ease;
+}
+
 .navbar_nav-list span {
   font-size: 0.85rem;
   font-weight: 600;
 }
 
 .navbar_nav-list a:hover {
-  text-decoration: underline;
+  text-decoration: none;
+  color: #ffde00;
+  transform: translateY(-2px);
+  text-shadow: 1px 1px 0px rgba(0,0,0,0.2);
 }
 
 .icon {
@@ -75,12 +73,22 @@
   background: none;
   border: none;
   cursor: pointer;
+  transition: transform 0.1s ease;
+}
+
+.navbar_button:hover {
+  transform: scale(1.1);
 }
 
 .img_pokeball {
   width: 2.5rem;
   height: 2.5rem;
-  filter: drop-shadow(2px 2px 0px rgba(0, 0, 0, 0.2));
+  filter: drop-shadow(2px 2px 0px rgba(0, 0, 0, 0.3));
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.img_pokeball:hover {
+  transform: rotate(20deg) scale(1.05);
 }
 
 .menu-links {
@@ -101,6 +109,7 @@
   padding: 5px 12px;
   border-radius: 20px;
   border: 2px solid var(--dark-maroon);
+  box-shadow: inset 2px 2px 0px rgba(0,0,0,0.4);
 }
 
 .home-page-container {
@@ -116,16 +125,22 @@
   color: var(--pokedex-red);
   text-shadow: 4px 4px 0px var(--deep-brown);
   margin: 0; 
+  font-family: 'Press Start 2P', cursive;
 }
 
 .burger-btn {
   background: transparent; 
-  border: none;             
+  border: none;              
   outline: none;            
   padding: 0;              
-  cursor: none;
+  cursor: pointer;
   appearance: none;         
   -webkit-appearance: none;
+  transition: transform 0.2s;
+}
+
+.burger-btn:hover {
+  transform: scale(1.1);
 }
 
 .burger-btn:focus, 

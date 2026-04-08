@@ -1,4 +1,3 @@
-/* ---------------------- GLOBAL QUERYS ---------------------- */
 @media (max-width: 768px) {
   body {
     background-attachment: scroll;
@@ -9,7 +8,7 @@
     font-size: 1.8rem !important;
     margin: 0px 10px;
     letter-spacing: -1px;
-    text-shadow: 1px 1px 0px var(--deep-brown);
+    text-shadow: 2px 2px 0px var(--deep-brown); 
   }
 
   .press-start {
@@ -20,15 +19,9 @@
     filter: blur(2px) grayscale(20%) opacity(0.3);
   }
 
-  h1 {
-    font-size: 1.5rem;
-  }
-  h2 {
-    font-size: 1.2rem;
-  }
-  h3 {
-    font-size: 1rem;
-  }
+  h1 { font-size: 1.5rem; }
+  h2 { font-size: 1.2rem; }
+  h3 { font-size: 1rem; }
 
   #root {
     padding: 0 10px;
@@ -38,18 +31,15 @@
 
 @media (max-width: 380px) {
   .page_title {
-    font-size: 1rem !important;
+    font-size: 1.2rem !important;
   }
 
   .swal2-popup {
     font-size: 0.6rem !important;
     width: 95% !important;
+    border: 3px solid var(--deep-brown) !important;
   }
 }
-
-/* ---------------- GLOBAL QUERYS END ---------------------- */
-
-/* ------------------------ NAVBAR -------------------------  */
 
 @media (max-width: 768px) {
   .navbar {
@@ -59,14 +49,15 @@
     width: 100%;
     height: 60px;
     background: var(--pokedex-red);
-    border-bottom: 1px solid var(--deep-brown);
+    border-bottom: 4px solid var(--deep-brown);
     z-index: 1000;
     overflow: hidden;
-    transition: height 0.6s cubic-bezier(0.77, 0, 0.175, 1);
+    transition: height 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+    box-shadow: 0 4px 0px rgba(0,0,0,0.15);
   }
 
   .navbar.open {
-    height: 300px;
+    height: 320px;
   }
 
   .navbar_nav {
@@ -83,16 +74,17 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 10;
+    gap: 15px;
     opacity: 0;
     transition: opacity 0.3s ease, transform 0.3s ease;
     transform: translateX(-10px);
+    width: 100%;
   }
 
   .navbar.open .menu-links {
     opacity: 1;
     transform: translateX(0);
-    transition-delay: 0.3s;
+    transition-delay: 0.2s;
   }
 
   .navbar_nav-list {
@@ -105,44 +97,44 @@
     display: flex;
     align-items: center;
     gap: 15px;
-    width: 100%;
+    width: 90%;
     padding: 12px 20px;
     font-size: 0.75rem;
     transition: all 0.2s ease;
-    margin-top: -25px;
-    margin-left: -10px;
+    margin-top: -10px;
+    margin-left: 10px;
     font-family: "Press Start 2P", cursive;
     text-shadow: 2px 2px 0px var(--deep-brown);
   }
 
-  .navbar_nav-list a:hover {
-    background-color: #2c3e50;
-    color: #00f2ff;
-    border-radius: 20px;
-    padding-left: 30px;
-    border-left: 1px solid #00f2ff;
-    box-shadow: inset 10px 0px 15px -10px rgba(0, 242, 255, 0.3);
+  .navbar_nav-list a:hover,
+  .navbar_nav-list a:active {
+    background-color: rgba(0,0,0,0.1);
+    color: #ffde00;
+    border-radius: 8px;
+    padding-left: 25px;
+    border-left: 4px solid #ffde00;
     transform: scale(1.02);
   }
 
   .navbar_nav-list a.active-link {
-    background-color: #2c3e50;
-    border-radius: 20px;
-    border-left: 1px solid #ffffff;
+    background-color: var(--deep-brown);
+    border-radius: 8px;
+    border-left: 4px solid var(--vintage-cream);
     color: #ffffff;
     padding-left: 25px;
     pointer-events: none;
   }
 
-  .navbar_nav-list a:hover .icon {
-    filter: drop-shadow(0px 0px 8px #00f2ff);
-    transform: rotate(5deg);
+  .navbar_nav-list a:hover .icon,
+  .navbar_nav-list a:active .icon {
+    transform: rotate(10deg) scale(1.2);
   }
 
   .navbar_nav-list .icon {
-    width: 32px;
-    height: 32px;
-    margin-left: -10px;
+    width: 24px;
+    height: 24px;
+    margin-left: 0;
     transition: all 0.3s ease;
     filter: drop-shadow(2px 2px 0px rgba(0, 0, 0, 0.5));
   }
@@ -162,13 +154,14 @@
   }
 
   .img_pokeball {
-    width: 40px;
-    height: 40px;
-    transition: transform 0.6s ease;
+    width: 35px;
+    height: 35px;
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    filter: drop-shadow(2px 2px 0px rgba(0, 0, 0, 0.3));
   }
 
   .navbar.open .img_pokeball {
-    transform: rotate(180deg);
+    transform: rotate(180deg) scale(1.1);
   }
 
   .burger-container {
@@ -184,21 +177,17 @@
   }
 
   .navbar.open .burger-container {
-    border-bottom: 1px solid var(--deep-brown);
-    background-color: rgba(0, 0, 0, 0.05);
+    border-bottom: 2px dashed var(--deep-brown);
+    background-color: rgba(0, 0, 0, 0.1);
   }
 }
-
-/* ------------------ NAVBAR END ----------------------- */
-
-/* ---------------------- LAYOUT ---------------------- */
 
 @media (max-width: 768px) {
   .panels-container {
     display: flex;
     flex-direction: column;
     width: 95vw;
-    gap: 15px;
+    gap: 20px;
     padding: 0;
     margin-bottom: 20px;
   }
@@ -228,10 +217,11 @@
     flex-direction: column !important;
     align-items: stretch !important;
     gap: 15px;
-    padding: 10px;
+    padding: 15px;
     max-width: 100%;
     margin: 1rem 0;
-    border-width: 3px;
+    border: 4px solid var(--deep-brown) !important;
+    box-shadow: 6px 6px 0px rgba(0,0,0,0.15) !important;
   }
 
   .pokemon-img,
@@ -246,6 +236,7 @@
 
   .pokemon-img img {
     max-width: 250px;
+    margin: 0 auto;
   }
 
   .grid-1-2 {
@@ -260,12 +251,12 @@
 
   .panel-header {
     font-size: 0.8rem;
-    padding: 8px;
+    padding: 12px;
   }
 
   .sidebar-left .panel-header,
   .sidebar-right .panel-header {
-    margin: -20px -20px 10px -20px;
+    margin: -20px -20px 15px -20px;
     border-radius: 8px 8px 0 0;
   }
 
@@ -278,47 +269,44 @@
   }
 }
 
-/* ------------------- LAYOUT END --------------------- */
-
-/* ------------------ COMPONENTS --------------------- */
-
 @media (max-width: 768px) {
-  /* --- 1. FORMULARIOS DE LOGIN Y CRUD --- */
-
   .pokemon_form,
   .crud-form-container {
     width: 95%;
-    padding: 15px;
+    padding: 20px; /* Mejor espaciado interno */
     margin: 20px auto;
-    box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.1);
+    border: 4px solid var(--deep-brown) !important;
+    box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.15);
   }
 
   .pokemon_form input[type="text"],
   .crud-form-container input[type="text"],
   .crud-form-container select {
     font-size: 0.8rem;
-    padding: 10px;
+    padding: 12px;
     width: 100%;
     box-sizing: border-box;
   }
 
   .crud-form-container input[type="submit"],
-  .crud-form-container input[type="reset"] {
+  .crud-form-container input[type="reset"],
+  .form-actions {
     width: 100%;
     margin: 5px 0;
     padding: 15px;
     font-size: 0.8rem;
+    flex-direction: column;
   }
 
   .preview-container {
-    width: 120px;
-    height: 120px;
+    width: 140px;
+    height: 140px;
     margin: 10px auto;
   }
 
   .crud-table-container {
     width: 95%;
-    padding: 10px;
+    padding: 0;
     margin: 0 auto;
     overflow: hidden;
   }
@@ -327,7 +315,7 @@
     width: 100%;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
-    border: 1px solid var(--deep-brown);
+    border: 3px solid var(--deep-brown);
   }
 
   .pokedex-table {
@@ -338,7 +326,7 @@
     flex-direction: column;
     gap: 15px;
     align-items: stretch;
-    padding: 10px;
+    padding: 15px;
   }
 
   .search-container {
@@ -348,55 +336,51 @@
   .table-search-input {
     width: 100%;
     font-size: 0.7rem;
-    padding: 10px 10px 10px 35px;
+    padding: 12px 10px 12px 35px;
   }
 
   .btn-table-edit,
   .btn-table-delete {
-    width: 38px;
-    height: 38px;
+    width: 44px;
+    height: 44px;
   }
 
   .btn-table-edit img,
   .btn-table-delete img {
-    width: 22px;
-    height: 22px;
+    width: 24px;
+    height: 24px;
   }
 
   .pokedex-pagination {
     flex-wrap: wrap;
-    gap: 5px;
-    padding: 10px;
+    gap: 8px;
+    padding: 15px;
   }
 
   .pokedex-pagination button {
-    padding: 8px 12px;
+    padding: 10px 15px;
     font-size: 0.7rem;
   }
 
   footer {
     width: 100vw;
-    padding: 1rem 0.5rem;
+    padding: 1.5rem 1rem;
     font-size: 0.6rem;
   }
 
   footer h5 {
-    font-size: 0.55rem;
+    font-size: 0.6rem;
   }
 }
-
-/* ---------------- COMPONENTS END ------------------- */
-
-/* ---------------- PASWORD_STYLES ------------------- */
 
 @media (max-width: 480px) {
   .form_user {
     padding: 1.5rem;
-    width: 90%; 
+    width: 92%; 
     max-width: none; 
+    border: 3px solid var(--deep-brown); 
   }
 
- 
   .btn-exit-login {
     top: 15px;
     left: 15px;
@@ -409,40 +393,32 @@
 
   .page--title {
     margin-bottom: 1.5rem !important;
-    font-size: 0.7rem !important;
+    font-size: 0.8rem !important;
   }
 
-  
   .heroui-style-input {
-    font-size: 16px !important;
-    transform: scale(0.8);
-    transform-origin: left center;
-    margin-bottom: 10px !important;
+    font-size: 16px !important; 
+    margin-bottom: 12px !important;
+    height: 48px !important;
   }
-
 
   .btn {
-    padding: 12px;
+    padding: 15px; 
     font-size: 0.8rem !important;
   }
 }
 
-
 @media (max-height: 600px) {
   .form_content {
     align-items: flex-start;
-    padding-top: 20px;
+    padding-top: 30px; 
     overflow-y: auto;
   }
 
   .form_user {
-    margin-bottom: 20px;
+    margin-bottom: 30px;
   }
 }
-
-/* -------------- PASWORD_STYLES END ---------------- */
-
-/* --------------------- HOME ------------------- */
 
 @media (max-width: 768px) {
   .home-content {
@@ -460,5 +436,3 @@
     opacity: 0.5;
   }
 }
-
-/* --------------- HOME END -------------------- */

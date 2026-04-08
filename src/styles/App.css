@@ -1,10 +1,12 @@
 :root {
-  --pokedex-red: #cc322a; /* Chasis: Navbar y elementos de acción */
-  --vintage-cream: #e6d596; /* Fondo: El "aire" de la página */
-  --dark-maroon: #642c34; /* Texto: Títulos y contenido principal */
-  --clay-pink: #b45c64; /* Acento: Estados hover y alertas */
-  --lcd-blue: #a7b9d3; /* Pantalla: Fondos de cards, inputs y detalles */
-  --deep-brown: #4c3434; /* Bordes: El "contorno" de los botones y secciones */
+  --pokedex-red: #cc322a;
+  --vintage-cream: #e6d596;
+  --dark-maroon: #642c34;
+  --clay-pink: #b45c64;
+  --lcd-blue: #a7b9d3;
+  --deep-brown: #4c3434;
+  
+  --pixel-shadow: 4px 4px 0px var(--deep-brown);
 }
 
 * {
@@ -13,30 +15,13 @@
   padding: 0;
 }
 
-body,
-html {
-  margin: 0;
-  padding: 0;
-}
-
-html {
-  height: 100%;
-}
-
-.swal2-container {
-  z-index: 10000 !important; 
-}
-
 body {
-  margin: 0;
-  padding: 0;
   min-height: 100vh;
   color: var(--dark-maroon);
   font-family: "Montserrat", sans-serif;
   line-height: 1.6;
-  background:url("../assets/pokedex-background.png") no-repeat center center;
-  background-size: cover;
-  background-attachment: fixed;
+  background-color: var(--vintage-cream);
+  overflow-x: hidden;
 }
 
 body::before {
@@ -48,35 +33,42 @@ body::before {
   height: 100%;
   background: url("../assets/pokedex-background.jpg") no-repeat center center;
   background-size: cover;
-  filter: blur(4px) grayscale(30%) opacity(0.2);
+  filter: blur(6px) opacity(0.15);
   z-index: -1;
+  pointer-events: none;
 }
 
 .press-start {
-  font-family: "Press Start 2P", system-ui;
+  font-family: "Press Start 2P", cursive;
   font-size: 12px;
+  line-height: 1.2;
 }
 
 .page_title {
-  font-family: "Press Start 2P", system-ui;
+  font-family: "Press Start 2P", cursive;
   text-align: center;
-  margin: 10px;
+  margin: 2rem 10px;
   color: var(--pokedex-red);
-  text-shadow: 2px 2px 0px var(--deep-brown);
-  font-size: 3rem;
-}
-
-h1,
-h2,
-h3 {
-  color: var(--dark-maroon);
+  /* Sombra sólida tipo retro */
+  text-shadow: 3px 3px 0px var(--deep-brown);
+  /* Tamaño responsivo: mínimo 1.5rem, ideal 4vw, máximo 2.5rem */
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  text-transform: uppercase;
 }
 
 a {
   text-decoration: none;
-  transition: all 0.3s ease;
+  color: inherit;
+  transition: color 0.2s ease-in-out, transform 0.2s ease;
 }
 
-ul {
-  list-style: none;
+a:hover {
+  color: var(--clay-pink);
+  transform: translateY(-2px);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
 }

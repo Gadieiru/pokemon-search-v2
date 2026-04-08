@@ -1,62 +1,67 @@
-/* Loader */
 .ball {
-  width: 200px;
-  height: 200px;
+  width: 120px;
+  height: 120px;
   border-radius: 50%;
-  background: white;
   position: relative;
-  box-shadow: -20px 0 rgba(0, 0, 0, 0.1) inset;
-  animation: roll 1s ease-in-out infinite;
   background: linear-gradient(
-    to bottom,
-    #e83e35 0%,
-    #e83e35 50.5%,
-    #ffffff 50.51%,
+    180deg,
+    var(--pokedex-red) 0%,
+    var(--pokedex-red) 46%,
+    var(--deep-brown) 46%,
+    var(--deep-brown) 54%,
+    #ffffff 54%,
     #ffffff 100%
   );
+  border: 4px solid var(--deep-brown);
+  box-shadow: inset -10px -10px 15px rgba(0, 0, 0, 0.2),
+              8px 8px 0px rgba(0, 0, 0, 0.15);
+  animation: catch-wobble 3s ease-in-out infinite;
+  transform-origin: bottom center;
 }
 
-.ball:after {
+.ball::before {
   content: "";
   position: absolute;
-  top: calc(100px - 3px);
-  left: 0;
-  width: 200px;
-  height: 6px;
-  background: #3f3f3f;
-}
-
-.ball:before {
-  content: "";
-  position: absolute;
-  top: 67px;
-  left: 67px;
-  width: 54px;
-  height: 54px;
-  border: solid 6px #3f3f3f;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 30px;
+  height: 30px;
+  background: #ffffff;
+  border: 4px solid var(--deep-brown);
   border-radius: 50%;
-  background: white;
-  z-index: 1;
-  box-shadow: 0 0 15px -2px #c62828;
-  animation: button 3s ease infinite;
+  z-index: 10;
+  animation: button-status 3s infinite;
 }
 
-@keyframes roll {
-  0% {
-    transform: rotate(0);
-  }
-  90%,
-  100% {
-    transform: rotate(720deg);
-  }
+.ball::after {
+  content: "";
+  position: absolute;
+  top: 10px;
+  left: 15px;
+  width: 25px;
+  height: 12px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  transform: rotate(-30deg);
+  z-index: 5;
 }
 
-@keyframes button {
-  0%, 50%, 100% {
-    box-shadow: 0 0 15px -2px #c62828 inset;
-  }
+@keyframes catch-wobble {
+  0%, 15% { transform: rotate(0deg); }
+  20% { transform: rotate(-25deg); }
+  25% { transform: rotate(20deg); }
+  30% { transform: rotate(-15deg); }
+  35% { transform: rotate(10deg); }
+  40%, 100% { transform: rotate(0deg); }
+}
 
-  25%, 75% {
-    box-shadow: 0 0 10px -2px #1300ea inset;
-  }
+@keyframes button-status {
+  0%, 18% { box-shadow: 0 0 0px transparent; background-color: #fff; }
+  20% { box-shadow: 0 0 15px 5px rgba(255, 0, 0, 0.8); background-color: #ff9999; } 
+  25% { box-shadow: 0 0 0px transparent; background-color: #fff; }
+  30% { box-shadow: 0 0 15px 5px rgba(255, 0, 0, 0.8); background-color: #ff9999; } 
+  35% { box-shadow: 0 0 0px transparent; background-color: #fff; }
+  40%, 85% { box-shadow: 0 0 20px 8px rgba(0, 255, 65, 0.6); background-color: #ccffcc; } 
+  100% { box-shadow: 0 0 0px transparent; background-color: #fff; }
 }

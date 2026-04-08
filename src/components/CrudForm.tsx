@@ -243,7 +243,7 @@ export const CrudForm: React.FC<CrudFormProps> = ({
                 }))}
               onChange={(sel: MultiValue<{ value: number; label: string }>) => {
                 const ids = sel ? sel.map((opt) => opt.value) : [];
-                setForm({ ...form, type_id: ids });
+                setForm({ ...form,location_id: ids });
               }}
               placeholder="Seleccionar..."
             />
