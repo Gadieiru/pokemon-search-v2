@@ -1,63 +1,61 @@
-Ultima modificacion:
+# ⚡ My Pokedex: React + TypeScript
 
-Mi Pokedex - Proyecto Frontend con React
+![React](https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react&logoColor=black)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.0-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
+![Vite](https://img.shields.io/badge/Vite-6.0-646CFF?style=for-the-badge&logo=vite&logoColor=white)
 
-¡Hola! Bienvenido a mi proyecto. Esta es la parte visual (Frontend) de mi sistema de gestión de Pokémon. Básicamente, es la cara bonita que se conecta con la API que construí en el backend.
+¡Hola! Este es el Frontend de mi sistema de gestión Pokémon. Lo que empezó como un proyecto de práctica ha evolucionado en una aplicación estructurada, enfocada en el manejo de flujos de datos reales y la mejora constante de la arquitectura.
 
-Este proyecto ha sido súper interesante porque reciclé y adapté un CRUD que ya tenía, pero lo llevé al siguiente nivel conectándolo a una base de datos real y manejando lógica compleja.
+## 🛠️ ¿Qué cambió en esta versión?
 
-## ¿Con qué lo construí?:
+Decidí dejar atrás las bases de JavaScript puro para enfrentarme a herramientas más exigentes. No se trata solo de la estética, sino de construir código confiable:
 
-Quise usar tecnologías modernas pero manteniendo el control de lo que pasaba "bajo el capó":
+* **TypeScript (TSX):** Mi mayor reto y satisfacción. Implementar tipos para los Pokémon y las respuestas del servidor me ayudó a entender mejor cómo viaja la información y a evitar errores en tiempo de ejecución.
+* **Axios:** Migré de `fetch` nativo a Axios para organizar mejor las peticiones, configurar una instancia base y gestionar los errores de forma clara.
+* **React 19 + Vite:** La base ideal para una carga instantánea y un desarrollo fluido.
+* **Rediseño Visual:** Refactoricé el CSS para darle una identidad de Pokédex real, cuidando detalles en sombras, estados de botones y diseño responsivo.
 
-* **React 19 + Vite:** Para que la app vuele de rápida.
-* **React Router:** Para moverme entre el Login, el Registro y la lista de Pokémon sin recargar la página.
-* **Fetch API:** Decidí no usar librerías externas (como Axios) para las peticiones HTTP. Preferí hacerlo "a mano" con `fetch` nativo para entender realmente cómo funcionan las promesas, los headers y el envío de datos.
-* **SweetAlert2:** Para que las alertas de "Guardado con éxito" o "¿Estás seguro de borrar?" se vean profesionales y no sean el típico cuadro gris del navegador.
-* **Estilos:** CSS propio para darle identidad.
+## 🧠 Aprendizajes Clave
 
-## Lo que aprendí y los retos:
+Este proyecto refleja un proceso de crecimiento técnico:
+* **Seguridad de Tipos:** El paso a TS me dio la confianza de saber exactamente qué contiene cada variable en todo momento.
+* **Conectividad:** Lograr una integración perfecta con mi backend en Python, especialmente al manejar archivos multimedia con `FormData`.
+* **Código Limpio:** Me esforcé por crear componentes pequeños y legibles, aplicando buenas prácticas para que el proyecto sea fácil de entender.
 
-Siendo sincero, me enfrenté a varios problemas de lógica, especialmente al principio.
-* **Conexión Frontend-Backend:** Entender cómo enviar las imágenes junto con los datos de texto (usando `FormData`) fue un reto, pero logré que funcionara.
-* **Reciclaje de Código:** Tomé un CRUD viejo y lo transformé. Aprendí que leer y adaptar código es tan importante como escribirlo desde cero.
-* **Fetch:** Manejar las respuestas asíncronas y pintar los errores en pantalla me ayudó a comprender mucho mejor cómo funciona JavaScript.
+## ✨ Funcionalidades
 
-Al final, aprendí de mis errores, simplifiqué el código y me gustó mucho el resultado final.
+1.  **Sistema de Auth:** Registro e inicio de sesión con manejo de tokens (JWT).
+2.  **Privacidad de Datos:** Cada usuario gestiona su propia colección de Pokémon de forma independiente.
+3.  **Gestión Completa (CRUD):** Subida de imágenes con previsualización, edición de datos y borrado seguro.
 
-## Funcionalidades Actuales:
+## 🚀 Instalación Local
 
-Actualmente, la aplicación permite:
-1.  **Autenticación:** Puedes registrarte e iniciar sesión (se guarda un Token de seguridad).
-2.  **Ver Pokémon:** Una galería visual que carga las imágenes desde el servidor.
-3.  **Crear y Editar:** Formularios para agregar nuevos Pokémon (subiendo su foto) o corregir sus datos.
-4.  **Eliminar:** Borrado de registros con confirmación de seguridad.
+1. **Clonar el repositorio:**
+```bash
+git clone https://github.com/Gadieiru/pokemon-search-frontend.git
+Entrar a la carpeta:
 
-## ¿Cómo probarlo en tu PC?:
+Bash
+cd pokemon-search-frontend
+Instalar dependencias:
 
-Si quieres correr este proyecto localmente:
+Bash
+npm install
+Configuración:
+Crea un archivo .env en la raíz y apunta a la URL de tu API:
 
-1.  **Clona el repo:**
-    ```bash
-    git clone [https://github.com/Gadieiru/proyect_pokemon_search-frontend.git](https://github.com/Gadieiru/proyect_pokemon_search-frontend.git)
-    ```
+Fragmento de código
+VITE_API_URL=http://localhost:5000
+Ejecutar el proyecto:
 
-2.  **Instala las dependencias:**
-    ```bash
-    npm install
-    ```
+Bash
+npm run dev
+🔗 Enlaces Relacionados
+Backend Repository (Python/Flask): https://github.com/Gadieiru/pokemon-search-backend
 
-3.  **Configura el entorno:**
-    Asegúrate de tener el Backend corriendo (revisa el repo del backend para eso).
-    Crea un archivo `.env` si es necesario para apuntar a `http://localhost:3000`.
+Hecho con dedicación, café y ganas de seguir mejorando por Gadieiru
 
-4.  **¡Arráncalo!**
-    ```bash
-    npm run dev
-    ```
 
-## Enlaces Relacionados:
-* **Backend Repository:**  "https://github.com/Gadieiru/proyect_pokemon_search-backend.git"
+---
 
-----------------------------
-Hecho con esfuerzo y mucho café ☕.
+¡Listo! Ya tienes los links limpios, la estructura clara y todo el peso de tu esfuerzo en Python y TS bien documentado. ¡A por ese `git push`! 🚀🔥
