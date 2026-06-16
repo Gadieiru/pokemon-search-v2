@@ -6,7 +6,7 @@
 
 ¡Hola! Este es el Frontend de mi sistema de gestión Pokémon. Lo que empezó como un proyecto de práctica ha evolucionado en una aplicación estructurada, enfocada en el manejo de flujos de datos reales y la mejora constante de la arquitectura.
 
-## 🛠️ ¿Qué cambió en esta versión?
+## ¿Qué cambió en esta versión?
 
 Decidí dejar atrás las bases de JavaScript puro para enfrentarme a herramientas más exigentes. No se trata solo de la estética, sino de construir código confiable:
 
