@@ -51,7 +51,7 @@ Ejecutar el proyecto:
 Bash
 npm run dev
 Enlaces Relacionados
-Backend Repository (Python/Flask): https://github.com/Gadieiru/pokemon-search-backend
+Backend Repository (Python/Flask): https://github.com/Gadieiru/pokemon-api-python
 
 Hecho con dedicación, café y ganas de seguir mejorando por Gadieiru
 
