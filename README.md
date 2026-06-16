@@ -53,9 +53,4 @@ npm run dev
 Enlaces Relacionados
 Backend Repository (Python/Flask): https://github.com/Gadieiru/pokemon-api-python
 
-Hecho con dedicación, café y ganas de seguir mejorando por Gadieiru
-
-
----
-
-¡Listo! Ya tienes los links limpios, la estructura clara y todo el peso de tu esfuerzo en Python y TS bien documentado. ¡A por ese `git push`! 🚀🔥
+Hecho con dedicación, café y ganas de seguir mejorando por Gadieiru.
